@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .card {
@@ -73,7 +73,7 @@
     </div>
 </div>
 <!-- Navbar End - About Me Start -->
-<div class="flex flex-col lg:flex-row gap-7 justify-center items-center">
+<div class="flex flex-col lg:flex-row gap-7 lg:justify-around justify-center items-center">
     <div class="flex flex-col items-center p-3 lg:w-96 w-5/6 h-auto bg-gray-300 rounded-lg shadow-lg justify-center mt-4 lg:mt-12">
         <div class="flex flex-row w-full">
             <img class="rounded-md w-20 lg:w-48" src="https://avatars.githubusercontent.com/u/95939910?v=4"
@@ -136,13 +136,54 @@
     <!-- Knowledge End - Projects Start -->
 
 </div>
+<div class="flex flex-col justify-center items-center">
+    <p class="text-4xl font-bold text-gray-300 m-32">Projects</p>
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 justify-center" id="projects">
 
+    </div>
+</div>
 <script>
     fetch('https://api.github.com/users/burak-mumcu/repos')
         .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error('Hata:', error));
+        .then(repos => {
+            const filteredRepos = repos.filter(repo => repo.name !== 'burak-mumcu');
+            const sortedRepos = filteredRepos.sort((a, b) => {
+                const dateA = new Date(a.updated_at);
+                const dateB = new Date(b.updated_at);
+                return dateB - dateA; // Büyükten küçüğe doğru sıralama
+            });
+        console.log(sortedRepos);
+            sortedRepos.map((repo,index) => {
+                let projects = document.getElementById('projects')
+                if (index < 12) {
+                    let template = `
+                 <div class="lg:col-span-1">
+            <div class="relative flex w-4/5 lg:w-3/5 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md mx-auto my-12">
+                <div class="relative mx-4 -mt-6 h-40 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40 bg-gradient-to-r from-blue-500 to-blue-600">
+                </div>
+                <div class="p-6">
+                    <h5 class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+                        ${repo.name}
+                    </h5>
+                    <p class="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
+                        ${repo.description}
+                    </p>
+                </div>
+                <div class="p-6 pt-0">
+                    <a href="${repo.html_url}" data-ripple-light="true" type="button" class="cursor-pointer select-none rounded-lg bg-blue-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                        Source Code &rarr;
+                    </a>
+                </div>
+            </div>
+        </div>
+                `
+                    projects.innerHTML += template;
+                }
 
+            })
+
+        })
+        .catch(error => console.error('Hata:', error));
 </script>
 </body>
 </html>
