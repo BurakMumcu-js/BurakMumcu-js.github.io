@@ -1,0 +1,29 @@
+#skills {
+    background-color: #fff;
+    padding: 2rem 0;
+}
+
+.section-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#skills h2 {
+    margin-bottom: 1rem;
+}
+
+#skills ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+#skills ul li {
+    background-color: #f0f0f0;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+}

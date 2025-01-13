@@ -1,0 +1,42 @@
+#projects {
+    background-color: #fff;
+    padding: 2rem 0;
+}
+
+.section-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#projects h2 {
+    margin-bottom: 1rem;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.project-item {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: left;
+    background-color: #f9f9f9;
+}
+
+.project-item h3 {
+    margin-top: 0;
+}
+
+.project-item a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.project-item a:hover {
+    text-decoration: underline;
+}
